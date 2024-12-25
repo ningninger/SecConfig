@@ -1,29 +1,25 @@
 = Taint Specification Collection
 
-:toc: macro
-:toclevels: 2
-
-toc::[]
 
 == 目录
 
-- 概述
-- 使用说明
-- 项目结构
-- 示例
+* <<#什么是Taint Specification Collection?, 什么是 Taint Specification Collection?>>
+* <<#如何使用Taint Specification Collection?, 如何使用 Taint Specification Collection?>>
+* <<#项目结构, 项目结构>>
+* <<#示例, 示例>>
 
 
-== 概述
+== 什么是 Taint Specification Collection?
 
 `Taint Specification Collection` 是专为静态分析工具 `tai-e` 中的污点分析提供的配置文件集合，旨在为常见漏洞的安全分析提供支持。该集合涵盖了多种常见漏洞类型的污点规范，具体包括 `source`、`sink` 和 `transfer`。为了方便用户查询和选择，污点规范根据软件包和相关漏洞类型进行了结构化分类，从而为污点分析提供了全面的配置方案。当前，该集合包含 406 条 `source` 配置、995 条 `sink` 配置和 138 条 `transfer` 配置，用户可以根据不同需求灵活使用和扩展。
 
 
-== 使用说明
+== 如何使用 Taint Specification Collection?
 
 `Taint Specification Collection` 中配置文件使用 `YAML` 格式（文件扩展名为 `.yaml` 或 `.yml`），便于用户阅读和编辑。用户可以直接将集合中的配置文件集成到 `tai-e` 污点分析工具的 `taint-config.yml` 配置中，或者根据实际需求对其进行修改和扩展，从而更好地满足特定的分析需求。
 
 
-.Note
+[Note]
 ====
 有关如何正确配置 `Tai-e` 污点分析，请参考 link:https://tai-e.pascal-lab.net/docs/0.2.2/reference/en/taint-analysis.html#configuring-taint-analysis[Configuring Taint Analysis]。
 
