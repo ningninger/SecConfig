@@ -1,9 +1,7 @@
 = Taint Specification Collection
 
-== 概述
-
-`Taint Specification Collection` 是专为静态分析工具 `tai-e` 中的污点分析提供的配置文件集合，旨在为常见漏洞的安全分析提供支持。该集合涵盖了多种常见漏洞类型的污点规范，具体包括 `source`、`sink` 和 `transfer`。为了方便用户查询和选择，污点规范根据软件包和相关漏洞类型进行了结构化分类，从而为污点分析提供了全面的配置方案。当前，该集合包含 406 条 `source` 配置、995 条 `sink` 配置和 138 条 `transfer` 配置，用户可以根据不同需求灵活使用和扩展。
-
+:toc: macro
+:toclevels: 2
 
 == 目录
 
@@ -11,6 +9,12 @@
 - 使用说明
 - 项目结构
 - 示例
+
+
+== 概述
+
+`Taint Specification Collection` 是专为静态分析工具 `tai-e` 中的污点分析提供的配置文件集合，旨在为常见漏洞的安全分析提供支持。该集合涵盖了多种常见漏洞类型的污点规范，具体包括 `source`、`sink` 和 `transfer`。为了方便用户查询和选择，污点规范根据软件包和相关漏洞类型进行了结构化分类，从而为污点分析提供了全面的配置方案。当前，该集合包含 406 条 `source` 配置、995 条 `sink` 配置和 138 条 `transfer` 配置，用户可以根据不同需求灵活使用和扩展。
+
 
 == 使用说明
 
@@ -22,6 +26,7 @@
 有关如何正确配置 `Tai-e` 污点分析，请参考 link:https://tai-e.pascal-lab.net/docs/0.2.2/reference/en/taint-analysis.html#configuring-taint-analysis[Configuring Taint Analysis]。
 
 ====
+
 
 == 项目结构
 
@@ -74,7 +79,7 @@ taint-config
   ** `sink`：根据漏洞类型进行分类。
 * `transfer` 类别：包含常用的 `transfer` 配置。
 
-其中 `source` 和 `sink` 的配置内容较多，为了帮助用户快速定位所需配置，我们采用了这种分类方式。除此以外，每个文件的叶子目录下还包含相应配置的 `README` 文件，供用户参考。
+由于 `source` 和 `sink` 的配置内容较多，为了帮助用户快速定位所需配置，我们采用了这种分类方式。除此以外，每个文件的叶子目录下还包含相应配置的 `README` 文件，供用户参考。
 
 
 
@@ -105,3 +110,8 @@ transfer:
   - { method: "<java.lang.String: java.lang.String substring(int)>", from: base, to: result }
   - { method: "<java.lang.String: java.lang.String substring(int,int)>", from: base, to: result }
 #...
+```
+
+完成以上配置后，用户可以使用 `tai-e` 工具对待测试程序进行污点分析，以检测 `Jetty` 软件库作为入口导致的 `RCE` 类型漏洞。(＾▽＾)
+
+
