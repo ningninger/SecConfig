@@ -16,8 +16,11 @@
 
 `Taint Specification Collection` 使用 YAML 格式作为配置文件，便于阅读和编辑。用户可以直接将该集合中的配置文件应用于 tai-e 污点分析的 `taint-config.yml` 配置中，或根据实际需求进行修改和扩展。
 
-.Note
-有关如何配置 Tai-e 污点分析，请参考[Configuring Taint Analysis](https://tai-e.pascal-lab.net/docs/0.2.2/reference/en/taint-analysis.html#configuring-taint-analysis)。
+[NOTE]
+====
+有关如何配置 Tai-e 污点分析，请参考 link:https://tai-e.pascal-lab.net/docs/0.2.2/reference/en/taint-analysis.html#configuring-taint-analysis[Configuring Taint Analysis]。
+====
+
 
 == 项目结构
 
@@ -31,10 +34,12 @@
 
 == 示例
 
-以下是如何使用本集合配置文件的示例。假设用户需要查找与 RCE 类型注入漏洞相关的配置，针对使用 Jetty 软件库的待测试程序，可以按以下方式修改 `taint-config.yml` 配置文件：
+以下是如何使用本集合配置文件的示例。假设用户需要查找与 RCE（远程代码执行，Remote Code Execution，CWE-94）类型注入漏洞相关的配置，针对使用 Jetty 软件库的待测试程序，可以按照以下方式修改 `taint-config.yml` 配置文件：
 
-1. 将 `security/taint-config/injection/source/jetty/jetty-http/jetty-http.yml` 文件中的 source 配置添加到 `taint-config.yml`。
-2. 将 `security/taint-config/injection/sink/java/rce/command.yml` 文件中的 sink 配置添加到 `taint-config.yml`。
+
+1. 将 `taint-config/injection/source/jetty/jetty-http/jetty-http.yml` 文件中的关于 Jetty 软件库的 source 配置添加到 `taint-config.yml`。
+2. 将 `taint-config/injection/sink/java/rce/command.yml` 文件中关于 RCE 类型注入漏洞的 sink 配置添加到 `taint-config.yml`。
+3. 将 `taint-config/transfer/string-transfers.yml` 文件中关于 String 类型的 transfer 配置添加到 `taint-config.yml`。
 
 示例 YAML 配置如下：
 
