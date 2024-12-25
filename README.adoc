@@ -30,39 +30,39 @@
 
 [source]
 ----
-taint-config/
-│
-├── infoleak/
-│   ├── sink/           contains 141 sinks
-|   |   ├── java
-|   |   |   ├── RCE
-|   |   |   ├── CRLF
-|   |   |   └── ...             
-|   |   |
-|   |   ├── android
-|   |   |   └── ...
-|   |   |
-|   |   └── ...         
-|   |
-│   ├── source/         contains 158 sources
-|   |   ├── java
-|   |   |   ├── java-io
-|   |   |   ├── java-net
-|   |   |   └── ...             
-|   |   |
-|   |   ├── jetty
-|   |   |   └── ...
-|   |   |
-|   |   └── ...         
+taint-config
 |
-├── injection/
-│   ├── sink/           contains 854 sinks
-|   |   └── ...
+├─ infoleak     
+│   ├─ sink                 contains 141 sinks
+│   │   └─ java-io
 |   |
-│   ├── source/         contains 248 sources
-|   |   └── ... 
+│   └─ source               contains 158 sources
+│   |   └─ java
 |
-└── transfer/       contains 138 transfers about String
+├─ injection                contains 854 sinks
+│   ├─ sink
+│   │   ├─ android
+│   │   │   └─ sql-injection
+│   |   |
+│   │   ├─ java
+│   │   │   ├─ crlf
+│   │   │   ├─ path-traversal
+│   │   │   ├─ rce
+│   │   │   └─ ...
+|   |   |
+│   │   └─ ...
+|   |
+│   └─ source               contains 248 sources
+│   |   ├─ apache-struts2
+|   |   |
+│   |   ├─ javax
+|   |   |   ├─ javax-portlet
+|   |   |   ├─ javax-servlet
+|   |   |   └─ javax-swing
+|   |   |
+│   |   └─ ...    
+|
+└─transfer                  contains 138 transfers about String
 ----
 
 该项目首先对配置文件进行了分类，分为三个一级类别：`infoleak`、`injection` 和 `transfer`。
@@ -70,11 +70,9 @@ taint-config/
 * `infoleak` 类别：包含与信息泄露漏洞相关的配置，进一步细分为两个二级目录：
 ** `source`：按软件包名进行分类。
 ***`sink`：按软件包名进行分类。
-
 *`injection` 类别：包含与注入漏洞相关的配置，同样细分为两个二级目录：
 **`source`：按软件包名进行分类。
 ***`sink`：根据漏洞类型进行分类。
-
 *`transfer` 类别：包含常用的 `transfer` 配置。
 
 其中`source`和`sink`的配置内容较多，为了帮助用户快速定位所需配置，我们采用了这种分类方式。每个文件的叶子目录下还包含相应配置的 `README` 文件，供用户参考。
