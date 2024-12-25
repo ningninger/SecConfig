@@ -75,13 +75,13 @@ taint-config
   ** `sink`：根据漏洞类型进行分类。
 * `transfer` 类别：包含常用的 `transfer` 配置。
 
-其中`source`和`sink`的配置内容较多，为了帮助用户快速定位所需配置，我们采用了这种分类方式。每个文件的叶子目录下还包含相应配置的 `README` 文件，供用户参考。
+其中 `source` 和 `sink` 的配置内容较多，为了帮助用户快速定位所需配置，我们采用了这种分类方式。每个文件的叶子目录下还包含相应配置的 `README` 文件，供用户参考。
 
 
 
 == 示例
 
-以下是如何使用本集合配置文件的示例。假设用户需要查找与 `RCE`（远程代码执行，Remote Code Execution，CWE-94）类型注入漏洞相关的配置，针对使用 Jetty 软件库的待测试程序，可以按以下步骤修改 `taint-config.yml` 配置文件：
+以下是如何使用本集合配置文件的示例。假设用户需要查找与 `RCE(Remote Code Execution，CWE-94)` 类型注入漏洞相关的配置，针对使用 `Jetty` 软件库的待测试程序，可以按以下步骤修改 `taint-config.yml` 配置文件：
 
 1. 将 `taint-config/injection/source/jetty/jetty-http/jetty-http.yml` 文件中的 *Jetty 软件库* 相关的 `source` 配置添加到 `taint-config.yml`。
 2. 将 `taint-config/injection/sink/java/rce/command.yml` 文件中的 *RCE 类型注入漏洞* 相关的 `sink` 配置添加到 `taint-config.yml`。
