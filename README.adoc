@@ -2,7 +2,8 @@
 
 == 概述
 
-`Taint Specification Collection` 是专为静态分析工具 tai-e 中的污点分析提供的配置文件集合，旨在为常见漏洞的安全配置提供支持。该集合涵盖了多种漏洞类型下的污点规范，包括 source、sink 和 transfer。为了便于用户查询和选择，污点规范按软件包和相关漏洞类型进行了结构化分类，从而为污点分析提供了全面的配置支持。目前，该集合包含 406 条 source、995 条 sink 和 138 条 transfer。
+`Taint Specification Collection` 是专为静态分析工具 `tai-e` 中的污点分析提供的配置文件集合，旨在为常见漏洞的安全分析提供支持。该集合涵盖了多种常见漏洞类型的污点规范，具体包括 `source`、`sink` 和 `transfer`。为了方便用户查询和选择，污点规范根据软件包和相关漏洞类型进行了结构化分类，从而为污点分析提供了全面的配置方案。当前，该集合包含 406 条 `source` 配置、995 条 `sink` 配置和 138 条 `transfer` 配置，用户可以根据不同需求灵活使用和扩展。
+
 
 == 目录
 
@@ -14,32 +15,79 @@
 
 == 使用说明
 
-`Taint Specification Collection` 使用 YAML 格式作为配置文件，便于阅读和编辑。用户可以直接将该集合中的配置文件应用于 tai-e 污点分析的 `taint-config.yml` 配置中，或根据实际需求进行修改和扩展。
+`Taint Specification Collection` 中配置文件使用 `YAML` 格式（文件扩展名为 `.yaml` 或 `.yml`），便于用户阅读和编辑。该格式以其简洁且易于理解的语法，广泛应用于配置文件的编写。用户可以直接将集合中的配置文件集成到 `tai-e` 污点分析工具的 `taint-config.yml` 配置中，或者根据实际需求对其进行修改和扩展，从而更好地满足特定的分析需求。
+
 
 [NOTE]
 ====
-有关如何配置 Tai-e 污点分析，请参考 link:https://tai-e.pascal-lab.net/docs/0.2.2/reference/en/taint-analysis.html#configuring-taint-analysis[Configuring Taint Analysis]。
-====
+有关如何正确配置 `Tai-e` 污点分析，请参考 link:https://tai-e.pascal-lab.net/docs/0.2.2/reference/en/taint-analysis.html#configuring-taint-analysis[Configuring Taint Analysis]。
 
+====
 
 == 项目结构
 
 本项目的文件组织结构如下：
 
-- `source/` 目录包含了污点源的配置文件。
-- `sink/` 目录包含了污点汇的配置文件。
-- `transfer/` 目录包含了污点传输的配置文件。
+[source]
+----
+taint-config/
+│
+├── infoleak/
+│   ├── sink/           contains 141 sinks
+|   |   ├── java
+|   |   |   ├── RCE
+|   |   |   ├── CRLF
+|   |   |   └── ...             
+|   |   |
+|   |   ├── android
+|   |   |   └── ...
+|   |   |
+|   |   └── ...         
+|   |
+│   ├── source/         contains 158 sources
+|   |   ├── java
+|   |   |   ├── java-io
+|   |   |   ├── java-net
+|   |   |   └── ...             
+|   |   |
+|   |   ├── jetty
+|   |   |   └── ...
+|   |   |
+|   |   └── ...         
+|
+├── injection/
+│   ├── sink/           contains 854 sinks
+|   |   └── ...
+|   |
+│   ├── source/         contains 248 sources
+|   |   └── ... 
+|
+└── transfer/       contains 138 transfers about String
+----
 
-每个目录下的配置文件都按漏洞类型进行分类，用户可以根据需求选择合适的文件进行集成。
+该项目首先对配置文件进行了分类，分为三个一级类别：`infoleak`、`injection` 和 `transfer`。
+
+- **`infoleak` 类别**：包含与信息泄露漏洞相关的配置，进一步细分为两个二级目录：
+  - **`source`**：按软件包名进行分类。
+  - **`sink`**：按软件包名进行分类。
+
+- **`injection` 类别**：包含与注入漏洞相关的配置，同样细分为两个二级目录：
+  - **`source`**：按软件包名进行分类。
+  - **`sink`**：根据漏洞类型进行分类。
+
+- **`transfer` 类别**：包含常用的 `transfer` 配置。
+
+其中`source`和`sink`的配置内容较多，为了帮助用户快速定位所需配置，我们采用了这种分类方式。每个文件的叶子目录下还包含相应配置的 `README` 文件，供用户参考。
+
+
 
 == 示例
 
-以下是如何使用本集合配置文件的示例。假设用户需要查找与 RCE（远程代码执行，Remote Code Execution，CWE-94）类型注入漏洞相关的配置，针对使用 Jetty 软件库的待测试程序，可以按照以下方式修改 `taint-config.yml` 配置文件：
+以下是如何使用本集合配置文件的示例。假设用户需要查找与 `RCE`（远程代码执行，Remote Code Execution，CWE-94）类型注入漏洞相关的配置，针对使用 Jetty 软件库的待测试程序，可以按以下步骤修改 `taint-config.yml` 配置文件：
 
-
-1. 将 `taint-config/injection/source/jetty/jetty-http/jetty-http.yml` 文件中的关于 Jetty 软件库的 source 配置添加到 `taint-config.yml`。
-2. 将 `taint-config/injection/sink/java/rce/command.yml` 文件中关于 RCE 类型注入漏洞的 sink 配置添加到 `taint-config.yml`。
-3. 将 `taint-config/transfer/string-transfers.yml` 文件中关于 String 类型的 transfer 配置添加到 `taint-config.yml`。
+1. 将 `taint-config/injection/source/jetty/jetty-http/jetty-http.yml` 文件中的 *Jetty 软件库* 相关的 `source` 配置添加到 `taint-config.yml`。
+2. 将 `taint-config/injection/sink/java/rce/command.yml` 文件中的 *RCE 类型注入漏洞* 相关的 `sink` 配置添加到 `taint-config.yml`。
+3. 将 `taint-config/transfer/string-transfers.yml` 文件中的关于 *String 类型* 的 `transfer` 配置添加到 `taint-config.yml`。
 
 示例 YAML 配置如下：
 
