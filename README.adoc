@@ -11,11 +11,10 @@
 - 使用说明
 - 项目结构
 - 示例
-- 常见问题解答 (FAQ)
 
 == 使用说明
 
-`Taint Specification Collection` 中配置文件使用 `YAML` 格式（文件扩展名为 `.yaml` 或 `.yml`），便于用户阅读和编辑。该格式以其简洁且易于理解的语法，广泛应用于配置文件的编写。用户可以直接将集合中的配置文件集成到 `tai-e` 污点分析工具的 `taint-config.yml` 配置中，或者根据实际需求对其进行修改和扩展，从而更好地满足特定的分析需求。
+`Taint Specification Collection` 中配置文件使用 `YAML` 格式（文件扩展名为 `.yaml` 或 `.yml`），便于用户阅读和编辑。用户可以直接将集合中的配置文件集成到 `tai-e` 污点分析工具的 `taint-config.yml` 配置中，或者根据实际需求对其进行修改和扩展，从而更好地满足特定的分析需求。
 
 
 [NOTE]
@@ -75,7 +74,7 @@ taint-config
   ** `sink`：根据漏洞类型进行分类。
 * `transfer` 类别：包含常用的 `transfer` 配置。
 
-其中 `source` 和 `sink` 的配置内容较多，为了帮助用户快速定位所需配置，我们采用了这种分类方式。每个文件的叶子目录下还包含相应配置的 `README` 文件，供用户参考。
+其中 `source` 和 `sink` 的配置内容较多，为了帮助用户快速定位所需配置，我们采用了这种分类方式。除此以外，每个文件的叶子目录下还包含相应配置的 `README` 文件，供用户参考。
 
 
 
@@ -87,7 +86,7 @@ taint-config
 2. 将 `taint-config/injection/sink/java/rce/command.yml` 文件中的 *RCE 类型注入漏洞* 相关的 `sink` 配置添加到 `taint-config.yml`。
 3. 将 `taint-config/transfer/string-transfers.yml` 文件中的关于 *String 类型* 的 `transfer` 配置添加到 `taint-config.yml`。
 
-示例 YAML 配置如下：
+示例 `taint-config.yml` 配置如下：
 
 ```YAML
 source:
