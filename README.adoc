@@ -2,51 +2,54 @@
 
 == 概述
 
-Taint Specification Collection 是专为静态分析工具 tai-e 中的污点分析提供的配置文件集合，旨在为常见漏洞的安全配置提供支持。该集合包含多种漏洞类型下的污点规范（source、sink 和 transfer），并根据软件包和相关漏洞类型进行结构化分类，便于用户查询和选择，从而为污点分析提供全面的配置支持。目前，该集合包括 406 条 source、995 条 sink 以及 138 条 transfer。
-
-
+`Taint Specification Collection` 是专为静态分析工具 tai-e 中的污点分析提供的配置文件集合，旨在为常见漏洞的安全配置提供支持。该集合涵盖了多种漏洞类型下的污点规范，包括 source、sink 和 transfer。为了便于用户查询和选择，污点规范按软件包和相关漏洞类型进行了结构化分类，从而为污点分析提供了全面的配置支持。目前，该集合包含 406 条 source、995 条 sink 和 138 条 transfer。
 
 == 目录
 
 - 概述
 - 使用说明
-- 项目组织
+- 项目结构
 - 示例
 - 常见问题解答 (FAQ)
 
-
 == 使用说明
 
-`Taint Specification Collection` 使用 YAML 作为配置文件格式，便于阅读和编辑，同时也可直接填写进tai-e污点分析的taint-config.yml配置中。
-用户可以根据自己的需求，直接使用该集合中的配置文件，或者根据自己的需求进行修改和扩展。
+`Taint Specification Collection` 使用 YAML 格式作为配置文件，便于阅读和编辑。用户可以直接将该集合中的配置文件应用于 tai-e 污点分析的 `taint-config.yml` 配置中，或根据实际需求进行修改和扩展。
 
 .Note
-如果你有任何关于如何Tai-e的污点分析如何配置，请参考[Configuring Taint Analysis](https://tai-e.pascal-lab.net/docs/0.2.2/reference/en/taint-analysis.html#configuring-taint-analysis)
+有关如何配置 Tai-e 污点分析，请参考[Configuring Taint Analysis](https://tai-e.pascal-lab.net/docs/0.2.2/reference/en/taint-analysis.html#configuring-taint-analysis)。
 
-== 项目组织
+== 项目结构
 
+本项目的文件组织结构如下：
 
+- `source/` 目录包含了污点源的配置文件。
+- `sink/` 目录包含了污点汇的配置文件。
+- `transfer/` 目录包含了污点传输的配置文件。
+
+每个目录下的配置文件都按漏洞类型进行分类，用户可以根据需求选择合适的文件进行集成。
 
 == 示例
 
-用户如果想要查找待测试程序（使用jetty软件库）中关于RCE类型的注入漏洞，即可将`security/taint-config/injection/source/jetty/jetty-http/jetty-http.yml`的source配置和`security/taint-config/injection/sink/java/rce/command.yml`添加到taint-config.yml配置文件中即可。
+以下是如何使用本集合配置文件的示例。假设用户需要查找与 RCE 类型注入漏洞相关的配置，针对使用 Jetty 软件库的待测试程序，可以按以下方式修改 `taint-config.yml` 配置文件：
 
+1. 将 `security/taint-config/injection/source/jetty/jetty-http/jetty-http.yml` 文件中的 source 配置添加到 `taint-config.yml`。
+2. 将 `security/taint-config/injection/sink/java/rce/command.yml` 文件中的 sink 配置添加到 `taint-config.yml`。
 
+示例 YAML 配置如下：
 
 ```YAML
-
 source:
   - { kind: call, method: "<org.eclipse.jetty.http.HttpCookie: java.lang.String getName()>", index: result, type: "java.lang.String" }
   - { kind: call, method: "<org.eclipse.jetty.http.HttpCookie: java.lang.String getValue()>", index: result, type: "java.lang.String" }
   - { kind: call, method: "<org.eclipse.jetty.http.HttpCookie: java.lang.String asString()>", index: result, type: "java.lang.String" }
-#...  
-
+#...
 
 sinks:
   - { method: "<java.lang.Runtime: java.lang.Process exec(java.lang.String)>", index: 0 }
   - { method: "<java.lang.Runtime: java.lang.Process exec(java.lang.String[])>", index: 0 }
-  - { method: "<java.lang.Runtime: java.lang.Process exec(java.lang.String,java.lang.String[])>", index: 0 }
-# ...
+  - { method: "<java.lang.Runtime: java.lang.Process exec(java.lang.String, java.lang.String[])>", index: 0 }
+#...
 
 transfer:
   - { method: "<java.lang.String: java.lang.String substring(int)>", from: base, to: result }
