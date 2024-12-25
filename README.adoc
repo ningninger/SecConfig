@@ -23,7 +23,7 @@
 ====
 * 有关如何正确配置 `Tai-e` 污点分析，请参考 link:https://tai-e.pascal-lab.net/docs/0.2.2/reference/en/taint-analysis.html#configuring-taint-analysis[Configuring Taint Analysis]。
 
-* 项目中注释的配置表示方法接口。实际使用时，请根据 `Tai-e` 污点分析配置的格式，手动填写对应接口方法的配置信息。
+* 项目中注释的配置表示接口方法。实际使用时，请根据 `Tai-e` 污点分析配置的格式，手动填写对应实现方法的配置信息。
 ====
 
 
