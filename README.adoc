@@ -1,30 +1,54 @@
-= SecConfig
+= Taint Specification Collection
 
 == 概述
 
-`SecConfigs` 是一个专用于 `tai-e` 中污点分析的配置文件的仓库，旨在提供结构化且易于维护的安全配置。目前包含406条source，995条sink，以及138条transfer。
+Taint Specification Collection 是专为静态分析工具 tai-e 中的污点分析提供的配置文件集合，旨在为常见漏洞的安全配置提供支持。该集合包含多种漏洞类型下的污点规范（source、sink 和 transfer），并根据软件包和相关漏洞类型进行结构化分类，便于用户查询和选择，从而为污点分析提供全面的配置支持。目前，该集合包括 406 条 source、995 条 sink 以及 138 条 transfer。
 
-注：以上统计数目包括接口方法。
 
-**//Todo: 所有README改成英文**
 
-== 配置文件说明
+== 目录
 
-配置文件归属于其目录文件名的特定的安全分析，这些配置可以直接应用于 `tai-e` 环境中。配置文件使用 YAML 格式，便于阅读和编辑。
+- 概述
+- 使用说明
+- 项目组织
+- 示例
+- 常见问题解答 (FAQ)
 
-== 配置文件结构
 
-[source]
-----
-taint-config/
-│
-├── infoleak/
-│   ├── sink/           包含141条sink
-│   ├── source/         包含158条source
-│
-├── injection/
-│   ├── sink/           包含854条sink
-│   ├── source/         包含248条source
-│   
-└── transfer/       包含关于String的138条transfer
-----
+== 使用说明
+
+`Taint Specification Collection` 使用 YAML 作为配置文件格式，便于阅读和编辑，同时也可直接填写进tai-e污点分析的taint-config.yml配置中。
+用户可以根据自己的需求，直接使用该集合中的配置文件，或者根据自己的需求进行修改和扩展。
+
+.Note
+如果你有任何关于如何Tai-e的污点分析如何配置，请参考[Configuring Taint Analysis](https://tai-e.pascal-lab.net/docs/0.2.2/reference/en/taint-analysis.html#configuring-taint-analysis)
+
+== 项目组织
+
+
+
+== 示例
+
+用户如果想要查找待测试程序（使用jetty软件库）中关于RCE类型的注入漏洞，即可将`security/taint-config/injection/source/jetty/jetty-http/jetty-http.yml`的source配置和`security/taint-config/injection/sink/java/rce/command.yml`添加到taint-config.yml配置文件中即可。
+
+
+
+```YAML
+
+source:
+  - { kind: call, method: "<org.eclipse.jetty.http.HttpCookie: java.lang.String getName()>", index: result, type: "java.lang.String" }
+  - { kind: call, method: "<org.eclipse.jetty.http.HttpCookie: java.lang.String getValue()>", index: result, type: "java.lang.String" }
+  - { kind: call, method: "<org.eclipse.jetty.http.HttpCookie: java.lang.String asString()>", index: result, type: "java.lang.String" }
+#...  
+
+
+sinks:
+  - { method: "<java.lang.Runtime: java.lang.Process exec(java.lang.String)>", index: 0 }
+  - { method: "<java.lang.Runtime: java.lang.Process exec(java.lang.String[])>", index: 0 }
+  - { method: "<java.lang.Runtime: java.lang.Process exec(java.lang.String,java.lang.String[])>", index: 0 }
+# ...
+
+transfer:
+  - { method: "<java.lang.String: java.lang.String substring(int)>", from: base, to: result }
+  - { method: "<java.lang.String: java.lang.String substring(int,int)>", from: base, to: result }
+#...
