@@ -1,3 +1,0 @@
-sinks:
-  - { method: "<javax.servlet.RequestDispatcher: void forward(javax.servlet.ServletRequest,javax.servlet.ServletResponse)>", index: 1 }
-  - { method: "<javax.servlet.RequestDispatcher: void include(javax.servlet.ServletRequest,javax.servlet.ServletResponse)>", index: 1 }

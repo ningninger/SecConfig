@@ -1,2 +1,0 @@
-sources:
-  - { kind: call, method: "<io.dropwizard.servlets.Servlets: java.lang.String getFullUrl(javax.servlet.http.HttpServletRequest)>", index: result, type: "java.lang.String" }
