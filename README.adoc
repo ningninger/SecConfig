@@ -3,8 +3,8 @@
 
 == 目录
 
-* <<#什么是Taint Specification Collection?, 什么是 Taint Specification Collection?>>
-* <<#如何使用Taint Specification Collection?, 如何使用 Taint Specification Collection?>>
+* <<#什么是 Taint Specification Collection?, 什么是 Taint Specification Collection?>>
+* <<#如何使用 Taint Specification Collection?, 如何使用 Taint Specification Collection?>>
 * <<#项目结构, 项目结构>>
 * <<#示例, 示例>>
 
@@ -19,7 +19,7 @@
 `Taint Specification Collection` 中配置文件使用 `YAML` 格式（文件扩展名为 `.yaml` 或 `.yml`），便于用户阅读和编辑。用户可以直接将集合中的配置文件集成到 `tai-e` 污点分析工具的 `taint-config.yml` 配置中，或者根据实际需求对其进行修改和扩展，从而更好地满足特定的分析需求。
 
 
-[Note]
+[NOTE]
 ====
 有关如何正确配置 `Tai-e` 污点分析，请参考 link:https://tai-e.pascal-lab.net/docs/0.2.2/reference/en/taint-analysis.html#configuring-taint-analysis[Configuring Taint Analysis]。
 
