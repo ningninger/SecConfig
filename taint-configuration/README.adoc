@@ -1,9 +1,9 @@
-= Taint Configuration for Typical Vulnerabilities
+= Taint Configuration for Common Vulnerabilities
 
 
-`Taint Configuration for Typical Vulnerabilities` is a collection of configuration files provided for `taint analysis`. This collection encompasses taint specifications for various common vulnerability types, specifically including `source`, `sink`, and `transfer`. To facilitate user lookup and selection, the taint specifications are structurally categorized based on packages and related vulnerability types, providing a comprehensive configuration scheme for taint analysis. Currently, this collection contains 406 `source` configurations, 995 `sink` configurations, and 138 `transfer` configurations, allowing users to flexibly utilize and extend based on their specific needs.
+`Taint Configuration for Common Vulnerabilities` is a collection of configuration files provided for `taint analysis`. This collection encompasses taint specifications(`source`, `sink`, and `transfer`) for various common vulnerability types. To facilitate user lookup and selection, the taint specifications are structurally categorized based on packages and related vulnerability types, providing a comprehensive configuration scheme for taint analysis. Currently, this collection contains 406 `source` configurations, 995 `sink` configurations, and 138 `transfer` configurations, allowing users to flexibly utilize and extend based on their specific needs.
 
-== How to Use Taint Configuration for Typical Vulnerabilities?
+== How to Use Taint Configuration for Common Vulnerabilities?
 
 Users can directly integrate the configuration files from this collection into the `Tai-e` taint analysis tool's `taint-config.yml` configuration, or modify and extend them as needed to better meet specific analysis requirements. For information on properly configuring `Tai-e` taint analysis, please refer to the link:https://tai-e.pascal-lab.net/docs/0.2.2/reference/en/taint-analysis.html#configuring-taint-analysis[Configuring Taint Analysis].
 
@@ -60,12 +60,12 @@ This project first categorizes the configuration files into three main categorie
 
 * `transfer` category: Contains commonly used `transfer` configurations.
 
-In addition, each file's leaf directory contains a corresponding `README` file for user reference.
+Due to the large number of configurations for source and sink, we have adopted this classification approach to help users quickly locate the required configurations. In addition, each file's leaf directory contains a corresponding README file for user reference.
 
 
 == An example
 
-Here is an example of how to use the configuration files from this collection. Suppose the user needs to find configurations related to `RCE (Remote Code Execution, CWE-94)` injection vulnerabilities for a program under test that uses the `Jetty` software library. The following steps can be taken to modify the `taint-config.yml` configuration file:
+Here is an example of how to use the configuration files from this collection. Suppose the user needs to detect an `RCE (Remote Code Execution, CWE-94)` injection vulnerability in a program under test that uses the `Jetty` software library. The following steps can be taken to modify the `taint-config.yml` configuration file:
 
 1. Add the `source` configuration related to the *Jetty software library* from the file `taint-configuration/injection/source/jetty/jetty-http/jetty-http.yml` to the `taint-config.yml`.
 2. Add the `sink` configuration related to the *RCE type injection vulnerability* from the file `taint-configuration/injection/sink/java/rce/command.yml` to the `taint-config.yml`.
