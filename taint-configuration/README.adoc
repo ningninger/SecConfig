@@ -1,7 +1,7 @@
 = Taint Configuration for Common Vulnerabilities
 
 
-`Taint Configuration for Common Vulnerabilities` is a collection of configuration files provided for `taint analysis`. This collection encompasses taint specifications(`source`, `sink`, and `transfer`) for various common vulnerability types. To facilitate user lookup and selection, the taint specifications are structurally categorized based on packages and related vulnerability types, providing a comprehensive configuration scheme for taint analysis. Currently, this collection contains 406 `source` configurations, 995 `sink` configurations, and 138 `transfer` configurations, allowing users to flexibly utilize and extend based on their specific needs.
+`Taint Configuration for Common Vulnerabilities` is a collection of configuration files provided for `taint analysis`. This collection encompasses taint specifications (`source`, `sink`, and `transfer`) for various common vulnerability types. To facilitate user lookup and selection, the taint specifications are structurally categorized based on packages and related vulnerability types, providing a comprehensive configuration scheme for taint analysis. Currently, this collection contains 406 `source` configurations, 995 `sink` configurations, and 138 `transfer` configurations, allowing users to flexibly utilize and extend based on their specific needs.
 
 == How to Use Taint Configuration for Common Vulnerabilities?
 
@@ -65,7 +65,7 @@ Due to the large number of configurations for source and sink, we have adopted t
 
 == An example
 
-Here is an example of how to use the configuration files from this collection. Suppose the user needs to detect an `RCE (Remote Code Execution, CWE-94)` injection vulnerability in a program under test that uses the `Jetty` software library. The following steps can be taken to modify the `taint-config.yml` configuration file:
+Here is an example of how to use the configuration files from this collection. Suppose the user needs to detect an `RCE (Remote Code Execution)` injection vulnerability in a program under test that uses the `Jetty` software library. The following steps can be taken to modify the `taint-config.yml` configuration file:
 
 1. Add the `source` configuration related to the *Jetty software library* from the file `taint-configuration/injection/source/jetty/jetty-http/jetty-http.yml` to the `taint-config.yml`.
 2. Add the `sink` configuration related to the *RCE type injection vulnerability* from the file `taint-configuration/injection/sink/java/rce/command.yml` to the `taint-config.yml`.
