@@ -96,4 +96,4 @@ transfer:
 #...
 ```
 
-Once the configuration is completed, the user can use the Tai-e tool to perform taint analysis on the program under test to detect RCE type vulnerabilities triggered by the Jetty software library as a taint entry point. 
+Once the configuration is completed, the user can use the `Tai-e` tool to perform taint analysis on the program under test to detect `RCE` type vulnerabilities triggered by the `Jetty` software library as a taint entry point. 
