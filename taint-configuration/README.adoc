@@ -48,7 +48,7 @@ taint-configuration
 Specifically, this project firstly categorizes the configuration files into three main categories: sink, source, and transfer.
 
 * `sink` category: Contains `sink` configurations files related to information leakage and injection vulnerabilities, further subdivided into two subdirectories:
-  ** `infoleak`: Categorized by vulnerability type.
+  ** `infoleak`: Categorized by package name.
   ** `injection`: Categorized by vulnerability type.
   
 * `source` category: Contains `source` configurations related to information leakage and injection vulnerabilities, further subdivided into two subdirectories:
