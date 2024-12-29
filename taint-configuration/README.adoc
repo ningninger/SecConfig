@@ -15,33 +15,33 @@ taint-configuration
 ├── sink
 │   ├── infoleak                       contains 141 sinks
 │   │   └── java-io
-|   |
+│   │
 │   └── injection                      contains 779 sinks
 │       ├── android
 │       │   └── sql-injection
-|       |
+│       │
 │       ├── java
 │       │   ├── crlf
 │       │   ├── path-traversal
 │       │   ├── rce
 │       │   └── ...
-|       |
+│       │
 │       └── ...
-|
+│
 ├── source                             
 │   ├── infoleak                       contains 158 sources
 │   │   └── java
-|   |
+│   │
 │   └── injection                      contains 169 sources
 │       ├── apache-struts2
-|       |
+│       │
 │       ├── javax
 │       │   ├── javax-portlet
 │       │   ├── javax-servlet
 │       │   └── javax-swing
-|       |
+│       │
 │       └── ...
-|
+│
 └── transfer                           contains 138 transfers about String
 ----
 
