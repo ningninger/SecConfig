@@ -12,53 +12,52 @@ The structure of this project is as follows:
 [source]
 ----
 taint-configuration
-|
-├─ infoleak     
-│   ├─ sink                 contains 141 sinks
-│   │   └─ java-io
+├── sink
+│   ├── infoleak                       contains 141 sinks
+│   │   └── java-io
 |   |
-│   └─ source               contains 158 sources
-│   |   └─ java
+│   └── injection                      contains 779 sinks
+│       ├── android
+│       │   └── sql-injection
+|       |
+│       ├── java
+│       │   ├── crlf
+│       │   ├── path-traversal
+│       │   ├── rce
+│       │   └── ...
+|       |
+│       └── ...
 |
-├─ injection                contains 779 sinks
-│   ├─ sink
-│   │   ├─ android
-│   │   │   └─ sql-injection
-│   |   |
-│   │   ├─ java
-│   │   │   ├─ crlf
-│   │   │   ├─ path-traversal
-│   │   │   ├─ rce
-│   │   │   └─ ...
-|   |   |
-│   │   └─ ...
+├── source                             
+│   ├── infoleak                       contains 158 sources
+│   │   └── java
 |   |
-│   └─ source               contains 169 sources
-│   |   ├─ apache-struts2
-|   |   |
-│   |   ├─ javax
-|   |   |   ├─ javax-portlet
-|   |   |   ├─ javax-servlet
-|   |   |   └─ javax-swing
-|   |   |
-│   |   └─ ...    
+│   └── injection                      contains 169 sources
+│       ├── apache-struts2
+|       |
+│       ├── javax
+│       │   ├── javax-portlet
+│       │   ├── javax-servlet
+│       │   └── javax-swing
+|       |
+│       └── ...
 |
-└─transfer                  contains 138 transfers about String
+└── transfer                           contains 138 transfers about String
 ----
 
-Specifically, this project first categorizes the configuration files into three main categories: `infoleak`, `injection`, and `transfer`.
+Specifically, this project firstly categorizes the configuration files into three main categories: sink, source, and transfer.
 
-* `infoleak` category: Contains configurations related to information leakage vulnerabilities, further subdivided into two subdirectories:
-  ** `source`: Categorized by package name.
-  ** `sink`: Categorized by package name.
+* `sink` category: Contains `sink` configurations files related to information leakage and injection vulnerabilities, further subdivided into two subdirectories:
+  ** `infoleak`: Categorized by vulnerability type.
+  ** `injection`: Categorized by vulnerability type.
   
-* `injection` category: Contains configurations related to injection vulnerabilities, also subdivided into two subdirectories:
-  ** `source`: Categorized by package name.
-  ** `sink`: Categorized by vulnerability type.
+* `source` category: Contains `source` configurations related to information leakage and injection vulnerabilities, further subdivided into two subdirectories:
+  ** `infoleak`: Categorized by package name.
+  ** `injection`: Categorized by package name.
 
 * `transfer` category: Contains commonly used `transfer` configurations.
 
-Additionally, each subdirectory contains a corresponding README file for reference.
+Additionally, each subdirectory contains a corresponding `README` file for reference.
 
 == How to Use it?
 
@@ -71,8 +70,8 @@ For information on properly configuring `Tai-e` taint analysis, please refer to 
 Here is an example of how to use the configuration files from this collection. 
 If the user needs to detect an `RCE (Remote Code Execution)` injection vulnerability in a Java project using the `Jetty` software library, the following steps can be taken to modify the `taint-config.yml` file:
 
-1. Add the `source` rules related to the *Jetty software library* from the file `taint-configuration/injection/source/jetty/jetty-http/jetty-http.yml` to the `taint-config.yml`.
-2. Add the `sink` rules related to the *RCE type injection vulnerability* from the file `taint-configuration/injection/sink/java/rce/command.yml` to the `taint-config.yml`.
+1. Add the `source` rules related to the *Jetty software library* from the file `taint-configuration/source/injection/jetty/jetty-http/jetty-http.yml` to the `taint-config.yml`.
+2. Add the `sink` rules related to the *RCE type injection vulnerability* from the file `taint-configuration/sink/injection/java/rce/command.yml` to the `taint-config.yml`.
 3. Add the `transfer` rules related to *String type* from the file `taint-configuration/transfer/string-transfers.yml` to the `taint-config.yml`.
 
 Example `taint-config.yml` configuration:
