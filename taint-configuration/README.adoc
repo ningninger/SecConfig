@@ -7,7 +7,7 @@ Taint Configuration for Common Vulnerabilities is a comprehensive collection of 
  Currently, this collection contains 327 source rules, 920 sink rules, and 138 transfer rules, enabling users to adapt and extend them to detect 13 types of vulnerabilities.
 
 To further enhance the user experience, we have also carefully organized the project structure by packages and vulnerability types to ensure clarity and ease of understanding of the rules, allowing users to quickly locate and apply the relevant rules.
-
+When creating or modifying your own taint analysis configurations, you can refer to the Taint Configuration for Common Vulnerabilities for guidance in your process.
 
 == Project Structure
 
