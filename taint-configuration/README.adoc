@@ -2,9 +2,9 @@
 
 `Taint Configuration for Common Vulnerabilities` is a comprehensive collection of `source`, `sink`, and `transfer` rules tailored for various common vulnerability types. 
 
-Manually collecting and writing taint analysis configurations for different vulnerability types can be time-consuming and tedious, especially for developers and security researchers with limited experience.
+Manually collecting and writing taint analysis configurations for different vulnerability types can be time-consuming and challenging, especially for developers and security researchers with limited experience.
 To help users streamline this process and improve the efficiency and accuracy of vulnerability detection, we have curated this configuration file. 
-Moreover, to further optimize the user experience, we have carefully organized the file structure to ensure the clarity and ease of understanding of the rules, allowing users to quickly find and apply the necessary rules.
+Moreover, to further enhance the user experience, we have carefully organized the file structure to ensure the clarity and ease of understanding of the rules, allowing users to quickly find and apply the relevant rules.
 
 Currently, this collection contains 327 `source` rules, 920 `sink` rules, and 138 `transfer` rules, enabling users to adapt and extend them to detect 13 types of vulnerabilities.
 
